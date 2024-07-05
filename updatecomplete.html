@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      flex-direction: column;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    .form-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 600px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input[type="text"] {
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+  <body>
+    <h1>Update your user ..</h1>
+    <form action="/updatecomplete" method="post">
+      <input type="text" / name="username" placeholder="plz enter yiur name">
+      <input type="text" / name = "userid" placeholder="plz enter user id ">
+      <input type="text" / name="useremail" placeholder="plz enter email">
+      <input type="text" / name="userage" placeholder="plz enter usergae">
+      <input type="text" / name="usermarks" placeholder="usermarks">
+      <input type="text" / name="usercompany" placeholder="usercompany ">
+      <input type="text" / name="usercar" placeholder="usercar">
+      <input type="text" / name="usergender" placeholder="usergender">
+      <input type="text" / name="userwork" placeholder="userwork">
+      <button >submit</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 300px;
+        }
+        input{
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #66afe9;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333333;
+        }
+        .button-div{
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <form action="/create" method="post">
+        <h2>Submit Form</h2>
+        <input type="text" name="username" placeholder="Username">
+        <input type="text" name="userid" placeholder="User ID">
+        <input type="text" name="useremail" placeholder="Email">
+        <input type="text" name="userage" placeholder="age">
+        <input type="text" name="usermarks" placeholder="marks">
+        <input type="text" name="usergender" placeholder="gender">
+        <input type="text" name="usercompany" placeholder="company">
+        <input type="text" name="usercar" placeholder="car">
+        <input type="text" name="userwork" placeholder="work">
+        <input type="submit" value="Submit">
+    </form>
+    <div class="button-div">
+    <button><a href='view'>view last user</a></button>
+    <button><a href='update'>update the user</a></button>
+    <button><a href='delete'>delete the user</a></button>
+    <button><a href='getall'>get all user</a></button>
+    <button><a href='finduser'>find userr</a></button>
+    </div>
+    
+</body>
+</html>
