@@ -15,6 +15,7 @@ console.log(newarr);
 
 for(let i=0;i<newarr;i++){
     if(newarr[i]==='asad'){
+        
         console.log(i);
         break;
     }

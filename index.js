@@ -13,8 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 var filearray = [];
 var updatedata = [];
-let index = 0;
-var lines= 0;
+let lines= 0;
 app.get('/', (req, res) => {
     console.log('GET request received for /');
     res.sendFile(path.join(__dirname, 'home.html'));
@@ -31,10 +30,10 @@ app.get('/', (req, res) => {
     const usergender = bodydata.usergender;
 
     let filedata = fs.readFileSync('./userdata.txt','utf-8');
-    filearray =  filedata.split('\n');
+    filearray =  filedata.split('(^');
+
 
 for(let i=0;i<filearray.length;i++){
-
     if(useremail===filearray[i]){
         break;
    res.send('plz choose another emial this has been taken ');
@@ -52,41 +51,48 @@ app.get('/update',(req, res) => {
     res.sendFile(path.join(__dirname, 'update.html'));
 })
 
-const checkemail =(req,res,next)=>{
-  const data = req.body.email;
-  const filedata = fs.readFileSync('./userdata.txt','utf-8');
-  filearray  = filedata.split('(^');
-  console.log(filearray);
 
-  const bigarray =  filedata.split('\n');
-  console.log(bigarray);
-  const length = bigarray.length-2;
-  const smallarary =  bigarray[length];
-  const fianlindex  = smallarary.split('(^');
-  const col = fianlindex.length-1;
-  console.log(filearray);
 
-let ismatch = false;
+const checkemail = (req, res, next) => {
+    const email = req.body.email;
+    let filedata;
 
-  for(let i=0;i<filearray.length;i++){
-    
-    if(i+=col){
-        lines++;
-        console.log(lines);
+    try {
+        filedata = fs.readFileSync('./userdata.txt', 'utf-8');
+    } catch (err) {
+        console.error('Error reading file:', err);
+        return res.status(500).send('Error reading file');
     }
-    if(data === filearray[i]){        
-        console.log(filearray[i]);
-        ismatch=true;
-        break;
-      }
-  }
-  if(ismatch===true){
-    next();
-  }
-  else{
-  return res.send('the data is not matching');
-  }
-}
+
+    let filearr = filedata.split('(^');
+    console.log(filearr);
+
+    let ismatch = false;
+    let i;
+
+    for (i = 0; i < filearr.length; i++) {
+        if (email === filearr[i].trim()) { // Comparing trimmed email (remove extra spaces)
+            ismatch = true;
+            break;
+        }
+    }
+
+    console.log('Checking if email is matched');
+    if (ismatch) {
+        console.log('Email is matched');
+        lines = Math.floor(i/8);
+        console.log(lines);
+        next();
+    } else {
+        console.log('Email is not matched');
+        res.status(403).send('Sorry, your email does not match with our records');
+    }
+};
+
+
+
+
+
 app.post('/update',checkemail,(req,res)=>{
     res.sendFile(path.join(__dirname, 'updatecomplete.html'));
 })
@@ -116,21 +122,34 @@ app.post('/updatecomplete',(req,res)=>{
 
     console.log('Data is updated in your file');
     console.log(filearray);
+    console.log(lines);
+    lines = 0;
+    console.log(lines);
 
     res.json(filearray);
 })
 
-app.get('/getall', (req, res) => {
+app.get('/getall',(req,res)=>{
 
-    const fileContent = fs.readFileSync('./userdata.txt', 'utf-8');
-    filearray = fileContent.split('\n');
-    res.json(filearray);
-})
+
+const fileContent = fs.readFileSync('./userdata.txt', 'utf-8');
+
+let filearray = fileContent.split('\n');
+
+for (let i = 0; i < filearray.length-1; i++) {
+    filearray[i] = `user${i} : `   +  filearray[i].replace(/(\(\^)/g, '__');
+
+}
+
+res.json(filearray);
+
+});
+
 app.get('/finduser', (req, res) => {
     res.sendFile(path.join(__dirname, 'finduser.html'));
     console.log('get is called for finduser');
-
 })
+
 app.post('/finduser', (req, res) => {
     const email = req.body.email;
     console.log('post is called for finduser');
